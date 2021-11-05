@@ -69,7 +69,7 @@ function startApp() {
 
 // VIEW ALL DEPARTMENTS function
 function allDepartments() {
-    connection.query("SELECT department.name, department.id FROM department", 
+    connection.query("SELECT department.name, department.id FROM department;", 
     function(err, res) {
       if (err) throw err
       console.table(res)
@@ -78,10 +78,24 @@ function allDepartments() {
   }
 
 // VIEW ALL ROLES function 
-
+function allRoles() {
+    connection.query("SELECT role.title, role.id, role.department_id, role.salary FROM role;",
+    function(err, res) {
+        if (err) throw err
+        console.table(res)
+        startApp()
+      })
+}
 
 // VIEW ALL EMPLOYEES function 
-
+function allEmployees() {
+    connection.query("SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id, role.title, department.name, role.salary FROM role JOIN employee ON employee.role_id = role.id JOIN department ON department.id = role.department_id;",
+    function(err, res) {
+        if (err) throw err
+        console.table(res)
+        startApp()
+      })
+}
 
 // ADD DEPARTMENT function 
 
