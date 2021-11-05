@@ -98,7 +98,27 @@ function allEmployees() {
 }
 
 // ADD DEPARTMENT function 
-
+function addDepartment() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the name of the department being added?"
+        }
+    ]).then(function(res) {
+        var query = connection.query(
+            "INSERT INTO department SET ? ",
+            {
+              name: res.name
+            },
+            function(err) {
+                if (err) throw err
+                console.table(res);
+                startApp();
+            }
+        )
+    })
+}
 
 // ALL ROLE function 
 
