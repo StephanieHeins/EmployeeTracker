@@ -38,6 +38,33 @@ function startApp() {
                   "Exit"
                 ]
         }
+    ]).then(function(val) {
+        switch (val.choice) {
+          case "View All Departments":
+              allDepartments();
+            break;
+          case "View All Roles":
+              allRoles();
+            break;
+          case "View All Employees":
+              allEmployees();
+            break;
+          case "Add a Department":
+              addDepartment();
+            break;
+          case "Add an Employee":
+              addEmployee();
+            break;
+          case "Add Role?":
+              addRole();
+            break;
+          case "Update Employee Role":
+              updateEmployee();
+            break;
+          case "Exit":
+              process.exit();
+            }
+    })
 }
 
 // VIEW ALL DEPARTMENTS function
