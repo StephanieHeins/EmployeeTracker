@@ -21,7 +21,24 @@ connection.connect(function(err) {
 });
 
 // MENU Prompt 
-
+function startApp() {
+    inquirer.prompt([
+        {
+        type: "list",
+        message: "What would you like to do?",
+        name: "choice",
+        choices: [
+                  "View All Departments", 
+                  "View All Roles",
+                  "View All Employees", 
+                  "Add a Department",
+                  "Add a Role",
+                  "Add an Employee",
+                  "Update Employee Role",
+                  "Exit"
+                ]
+        }
+}
 
 // VIEW ALL DEPARTMENTS function
 
