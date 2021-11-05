@@ -27,3 +27,19 @@ INSERT INTO role (title, salary, department_id)
 VALUE ("Security Analyst", 90000, 4);
 
 -- Employee 
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("John", "Smith", 1, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("James", "Johnson", 2, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Rebecca", "Austins", 3, 2);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Helen", "Franks", 3, 2);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Jim", "Rock", 4, 3);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Darlene", "Ma", 5, 3);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Jerry", "Lonestar", 6, 4);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Barb", "Zull", 7, 4);
