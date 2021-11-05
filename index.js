@@ -1,6 +1,6 @@
 // Dependencies 
 const inquirer = require("inquirer")
-const mysql = require("mysql")
+const mysql = require("mysql2")
 const cTable = require('console.table');
 
 // MySQL Connection Info 
@@ -68,7 +68,14 @@ function startApp() {
 }
 
 // VIEW ALL DEPARTMENTS function
-
+function allDepartments() {
+    connection.query("SELECT department.name, department.id FROM department", 
+    function(err, res) {
+      if (err) throw err
+      console.table(res)
+      startApp()
+    })
+  }
 
 // VIEW ALL ROLES function 
 

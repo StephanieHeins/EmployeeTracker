@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/StephanieHeins/EmployeeTracker/issues"
   },
-  "homepage": "https://github.com/StephanieHeins/EmployeeTracker#readme"
+  "homepage": "https://github.com/StephanieHeins/EmployeeTracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3-rc.0"
+  }
 }
