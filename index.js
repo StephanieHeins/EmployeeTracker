@@ -68,6 +68,17 @@ function startApp() {
 }
 
 // Department Array Function - For addRole
+var departmentArr = [];
+function selectDepartment() {
+  connection.query("SELECT * FROM department", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      departmentArr.push(res[i].title);
+    }
+
+  })
+  return departmentArr;
+}
 
 // Role Array Function - for addEmployee & updateEmployee
 
@@ -126,6 +137,43 @@ function addDepartment() {
 }
 
 // ADD ROLE function 
+function addRole() { 
+    inquirer.prompt([
+        {
+          name: "title",
+          type: "input",
+          message: "What is the title of this role?"
+        },
+        {
+          name: "salary",
+          type: "number",
+          message: "What is the salary for this role?"
+        },
+        {
+          name: "department",
+          type: "list",
+          message: "Which department is this role under?",
+          choices: selectDepartment()
+        }
+    ]).then(function (val) {
+      var departmentId = selectDepartment().indexOf(val.department) + 1
+      connection.query("INSERT INTO role SET ?", 
+      {
+          title: val.title,
+          salary: val.salary,
+          department_id: departmentId,
+          
+      }, function(err){
+          if (err) throw err
+          console.table(val)
+          console.log("New Role Added");
+          startPrompt()
+      })
+
+  })
+}
+
+/*
 function addRole() {
     inquirer.prompt([
         {
@@ -160,6 +208,7 @@ function addRole() {
         )
     })
 }
+*/
 
 /*
 function addRole() { 
