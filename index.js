@@ -73,7 +73,7 @@ function selectDepartment() {
   connection.query("SELECT * FROM department", function(err, res) {
     if (err) throw err
     for (var i = 0; i < res.length; i++) {
-      departmentArr.push(res[i].title);
+      departmentArr.push(res[i].name);
     }
 
   })
@@ -81,6 +81,17 @@ function selectDepartment() {
 }
 
 // Role Array Function - for addEmployee & updateEmployee
+var roleArr = [];
+function selectRole() {
+  connection.query("SELECT * FROM role", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      roleArr.push(res[i].title);
+    }
+
+  })
+  return roleArr;
+}
 
 // VIEW ALL DEPARTMENTS function
 function allDepartments() {
@@ -264,6 +275,39 @@ function addRole() {
 */
 
 // ADD EMPLOYEE function 
-
+function addEmployee() { 
+    inquirer.prompt([
+        {
+          name: "firstname",
+          type: "input",
+          message: "Please enter employee first name:"
+        },
+        {
+          name: "lastname",
+          type: "input",
+          message: "Please enter employee last name:"
+        },
+        {
+          name: "role",
+          type: "list",
+          message: "What is th",
+          choices: selectRole()
+        }
+    ]).then(function (val) {
+        var roleId = selectRole().indexOf(val.role) + 1
+        connection.query("INSERT INTO employee SET ?", 
+        {
+            first_name: val.firstName,
+            last_name: val.lastName,
+            role_id: roleId
+            
+        }, function(err){
+            if (err) throw err
+            console.table(val)
+            startApp()
+        })
+  
+    })
+  }
 
 // UPDATE EMPLOYEE ROLE function 
