@@ -55,7 +55,7 @@ function startApp() {
           case "Add an Employee":
               addEmployee();
             break;
-          case "Add Role?":
+          case "Add a Role":
               addRole();
             break;
           case "Update Employee Role":
@@ -178,7 +178,7 @@ function addRole() {
           if (err) throw err
           console.table(val)
           console.log("New Role Added");
-          startPrompt()
+          startApp()
       })
 
   })
