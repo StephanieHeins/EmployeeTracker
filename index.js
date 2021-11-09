@@ -94,6 +94,18 @@ function selectRole() {
 }
 
 // Last Name Array Function - for updateEmployee 
+selectName = () => {
+connection.query("SELECT * FROM employee", (err, res) => {
+  if (err) throw err
+    const lastNameArr = [];
+    res.forEach(({ last_name }) => {
+        lastNameArr.push(last_name);
+    });
+    return lastNameArr;
+  })
+}
+
+/*
 var lastNameArr = [];
 function selectName() {
   connection.query("SELECT * FROM employee", function(err, res) {
@@ -105,6 +117,7 @@ function selectName() {
   })
   return lastNameArr;
 }
+*/
 
 // VIEW ALL DEPARTMENTS function
 function allDepartments() {
@@ -339,7 +352,7 @@ function updateEmployee() {
         {
           name: "lastName",
           type: "list",
-          message: "Select the last name of the employee:",
+          message: "Select the employees last name:",
           choices: selectName()
         },
         {
@@ -353,11 +366,9 @@ function updateEmployee() {
       connection.query("UPDATE employee SET WHERE ?", 
       {
         last_name: val.lastName
-         
       }, 
       {
         role_id: roleId
-         
       }, 
       function(err){
           if (err) throw err
