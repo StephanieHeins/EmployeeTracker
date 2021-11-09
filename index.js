@@ -93,6 +93,19 @@ function selectRole() {
   return roleArr;
 }
 
+// Last Name Array Function - for updateEmployee 
+var lastNameArr = [];
+function selectName() {
+  connection.query("SELECT * FROM employee", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      lastNameArr.push(res[i].last_name);
+    }
+
+  })
+  return lastNameArr;
+}
+
 // VIEW ALL DEPARTMENTS function
 function allDepartments() {
     connection.query("SELECT department.name, department.id FROM department;", 
@@ -317,3 +330,41 @@ function addEmployee() {
   }
 
 // UPDATE EMPLOYEE ROLE function 
+function updateEmployee() {
+  // connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
+  // console.log(res)
+   // if (err) throw err
+   // console.log(res)
+  inquirer.prompt([
+        {
+          name: "lastName",
+          type: "list",
+          message: "Select the last name of the employee:",
+          choices: selectName()
+        },
+        {
+          name: "role",
+          type: "rawlist",
+          message: "What is the employees new title? ",
+          choices: selectRole()
+        },
+    ]).then(function(val) {
+      var roleId = selectRole().indexOf(val.role) + 1
+      connection.query("UPDATE employee SET WHERE ?", 
+      {
+        last_name: val.lastName
+         
+      }, 
+      {
+        role_id: roleId
+         
+      }, 
+      function(err){
+          if (err) throw err
+          console.table(val)
+          startApp()
+      })
+
+  });
+};
+
