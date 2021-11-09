@@ -94,6 +94,7 @@ function selectRole() {
 }
 
 // Last Name Array Function - for updateEmployee 
+/*
 selectName = () => {
 connection.query("SELECT * FROM employee", (err, res) => {
   if (err) throw err
@@ -104,6 +105,7 @@ connection.query("SELECT * FROM employee", (err, res) => {
     return lastNameArr;
   })
 }
+*/
 
 /*
 var lastNameArr = [];
@@ -344,23 +346,46 @@ function addEmployee() {
 
 // UPDATE EMPLOYEE ROLE function 
 function updateEmployee() {
-  // connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
-  // console.log(res)
-   // if (err) throw err
-   // console.log(res)
+  connection.query("SELECT * FROM employee", (err, res) => {
+  if (err) throw err;
   inquirer.prompt([
         {
           name: "lastName",
           type: "list",
           message: "Select the employees last name:",
-          choices: selectName()
-        },
-        {
-          name: "role",
+          choices: function() {
+            var lastNameArr = [];
+            for (var i = 0; i < res.length; i++) {
+              lastNameArr.push(res[i].last_name);
+            }
+            return lastNameArr;
+            }
+          },
+          {
+          name: "newRole",
           type: "rawlist",
           message: "What is the employees new title? ",
           choices: selectRole()
-        },
+          }
+        ])
+        .then((answer) => {
+            let query1 = "SELECT id FROM employee WHERE last_name = ?";
+            connection.query(query1, [answer.lastName], (err, res) => {
+                let query = "UPDATE employee SET role_id = (SELECT id FROM role WHERE title = ?) WHERE id = ?";
+                connection.query(query, [answer.newRole, res[0].id], (err, res) => {
+                    if (err) throw err;
+                    console.log("Employee role has been changed!");
+                    startApp();
+                })
+            })
+
+        })
+})
+
+};
+
+
+          /*
     ]).then(function(val) {
       var roleId = selectRole().indexOf(val.role) + 1
       connection.query("UPDATE employee SET WHERE ?", 
@@ -377,5 +402,6 @@ function updateEmployee() {
       })
 
   });
-};
-
+});
+}
+*/
