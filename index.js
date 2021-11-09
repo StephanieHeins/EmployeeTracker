@@ -278,20 +278,25 @@ function addRole() {
 function addEmployee() { 
     inquirer.prompt([
         {
-          name: "firstname",
+          name: "firstName",
           type: "input",
           message: "Please enter employee first name:"
         },
         {
-          name: "lastname",
+          name: "lastName",
           type: "input",
           message: "Please enter employee last name:"
         },
         {
           name: "role",
           type: "list",
-          message: "What is th",
+          message: "Select a role for this employee:",
           choices: selectRole()
+        },
+        {
+        name: "manager",
+        type: "number",
+        message: "Please enter the manager ID for their associated manager:",
         }
     ]).then(function (val) {
         var roleId = selectRole().indexOf(val.role) + 1
@@ -299,7 +304,8 @@ function addEmployee() {
         {
             first_name: val.firstName,
             last_name: val.lastName,
-            role_id: roleId
+            role_id: roleId,
+            manager_id: val.manager
             
         }, function(err){
             if (err) throw err
