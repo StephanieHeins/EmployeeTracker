@@ -9,6 +9,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
+    // ** ENTER PASSWORD HERE ** 
     password: "",
     database: "employeetrackerDB"
   });
@@ -92,34 +93,6 @@ function selectRole() {
   })
   return roleArr;
 }
-
-// Last Name Array Function - for updateEmployee 
-/*
-selectName = () => {
-connection.query("SELECT * FROM employee", (err, res) => {
-  if (err) throw err
-    const lastNameArr = [];
-    res.forEach(({ last_name }) => {
-        lastNameArr.push(last_name);
-    });
-    return lastNameArr;
-  })
-}
-*/
-
-/*
-var lastNameArr = [];
-function selectName() {
-  connection.query("SELECT * FROM employee", function(err, res) {
-    if (err) throw err
-    for (var i = 0; i < res.length; i++) {
-      lastNameArr.push(res[i].last_name);
-    }
-
-  })
-  return lastNameArr;
-}
-*/
 
 // VIEW ALL DEPARTMENTS function
 function allDepartments() {
@@ -212,96 +185,6 @@ function addRole() {
   })
 }
 
-/*
-function addRole() {
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "title",
-            message: "What is the title of this role?"
-        },
-        {
-            type: "number",
-            name: "salary",
-            message: "What is the salary for this role?"
-        },
-        {
-            type: "input",
-            name: "department",
-            message: "Please enter the department ID associated with this role:"
-        }
-    ]).then(function(res) {
-        var query = connection.query(
-            "INSERT INTO role SET ? ",
-            {
-              name: res.title,
-              salary: res.salary,
-              department_id: res.department
-            },
-            function(err) {
-                if (err) throw err
-                console.table(res);
-                console.log("New Department Added");
-                startApp();
-            }
-        )
-    })
-}
-*/
-
-/*
-function addRole() { 
-
-    connection.query("SELECT * FROM department", (err, res) => {
-        if (err) throw err;
-        inquirer.prompt([
-                {
-                name: 'roleDepartment',
-                type: 'list',
-                message: 'Which department does this role belong to?',
-                choices() {
-                    const departmentArray = [];
-                    res.forEach(({ department_name }) => {
-                        departmentArray.push(department_name);
-                    });
-                    return departmentArray;
-                    },
-                },
-                {
-                    name: 'roleTitle',
-                    type: 'input',
-                    message: 'What is the name of the role you would like to add?',
-                },
-                {
-                    name: 'roleSalary',
-                    type: 'input',
-                    message: 'What is the salary of the this role?',
-                },
-            ])
-            .then((answer) => {
-                let query2 = connection.query("SELECT id FROM department WHERE department_name = ?", [answer.roleDepartment], (err, res) => {
-                    let query = "INSERT INTO role SET ?";
-                    connection.query(query,
-                        [
-                            {
-                                title: answer.roleTitle,
-                                salary: answer.roleSalary,
-                                department_id: res[0].id
-                            },
-                        ],
-                        (err, res) => {
-                            if (err) throw err;
-                            console.table(res);
-                            console.log("New Role Added");
-                            startApp();
-                        }
-                    )
-                });
-            })
-    })
-};
-*/
-
 // ADD EMPLOYEE function 
 function addEmployee() { 
     inquirer.prompt([
@@ -380,28 +263,6 @@ function updateEmployee() {
             })
 
         })
-})
+  })
 
 };
-
-
-          /*
-    ]).then(function(val) {
-      var roleId = selectRole().indexOf(val.role) + 1
-      connection.query("UPDATE employee SET WHERE ?", 
-      {
-        last_name: val.lastName
-      }, 
-      {
-        role_id: roleId
-      }, 
-      function(err){
-          if (err) throw err
-          console.table(val)
-          startApp()
-      })
-
-  });
-});
-}
-*/
