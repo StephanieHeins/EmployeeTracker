@@ -34,6 +34,7 @@ Setup/Installation
 * Run `source db/schema.sql` to create the database, followed by `exit` to exit mysql.
 * Seed the database in terminal by running `npm run seed`.
 * For startup, make sure to enter your MySQL password on line 12 of the index.js file and save -- it is marked. 
+
 Startup
 * Once you've completed setup, run `npm start` to start the application. 
 * Choose the different options for viewing & creating departments, roles, and employees. 
