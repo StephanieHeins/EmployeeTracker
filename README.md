@@ -47,4 +47,4 @@ Startup
 
 ## Demo
 
-![Live Demo](Assets/emptrackergif)
+![Live Demo](Assets/emptrackergif.gif)
