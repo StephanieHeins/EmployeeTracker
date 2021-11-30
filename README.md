@@ -11,6 +11,7 @@ Future development includes adding the functions to assign managers, delete entr
 * [Usage](#usage)
 * [Screenshots](#screenshots)
 * [Demo](#demo)
+* [Licenses](#licenses)
 
 ## Links 
 
@@ -48,3 +49,6 @@ Startup
 ## Demo
 
 ![Live Demo](Assets/emptrackergif.gif)
+
+## Licenses
+MIT
